@@ -1,6 +1,6 @@
 -- insert new records in the tables
 
-INSERT INTO departments (departments_name)
+INSERT INTO department (department_name)
 VALUES
 ('Design'),
 ('Marketing'),
@@ -10,7 +10,7 @@ VALUES
 ('Business Strategy'),
 ('Legal');
 
-INSERT INTO roles (departments_name, job_title, salary)
+INSERT INTO `role` (title, salary, department_id)
 VALUES
 ('UX Artist', 45000, 1),
 ('Sales Associate', 25500, 4),
@@ -21,12 +21,12 @@ VALUES
 ('Business Strategist', 150000, 6),
 ('Director of Marketing', 200000, 2);
 
-INSERT INTO employees (first_name, last_name, role_id, manager_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES
-('Ileesa', 'Ramirez', 2, 2),
-('Margarita', 'Flores', 1, 1),
-('Rodolpho', 'Silva', 4, 3),
-('Marcus', 'Rashford', 3, 1),
-('Alejandro', 'Garnacho', 6, 3),
+('Ileesa', 'Ramirez', 2, NULL),
+('Margarita', 'Flores', 1, NULL),
+('Rodolpho', 'Silva', 4, NULL),
+('Marcus', 'Rashford', 3, NULL),
+('Alejandro', 'Garnacho', 6, NULL),
 ('Mario', 'Gotze', 5, 1),
 ('Erling', 'Haaland', 7, 1);
