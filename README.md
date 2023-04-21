@@ -31,6 +31,10 @@ To use this program, you'll need to have Node.js and MySQL installed on your com
 * DB_NAME=employee_db
 
 Replace the values with your own MySQL credentials.
+5. then npm i the following: 
+* inquirer
+* mysql2
+* console.table
 
 ## Usage
 
@@ -48,13 +52,9 @@ Once the program is running, you can use the arrow keys to navigate the menu and
 * Update Employee Role: allows you to update an employee's role in the database.
 * Update Employee Manager: allows you to update an employee's manager in the database.
 
-## Credits
 
-This program was written by Stephen Castillo as part of a coding bootcamp project. It was built using Node.js, MySQL, and the following NPM packages:
 
-* inquirer
-* mysql2
-* console.table
+
 
 
 
