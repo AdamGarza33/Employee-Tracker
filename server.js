@@ -6,7 +6,6 @@ const { async } = require("rxjs");
 
 
 
-// Start server after DB connection
 
 
 // Start the prompt functions
@@ -17,7 +16,7 @@ async function startPrompt() {
             type: 'list',
             name: 'menu',
             message: 'What would you like to do?',
-            choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Update An Employee Manager', 'Delete Department', 'Delete Role', 'Delete Employee', 'quit'],
+            choices: ['View All Departments', 'View All Roles', 'View All Employees', 'Add A Department', 'Add A Role', 'Add An Employee', 'Update An Employee Role', 'Update An Employee Manager','quit'],
             loop: true, 
             waitUserInput: true
 
@@ -73,7 +72,7 @@ function viewAllDepartments() {
             return;
         }
         console.table(result);
-        startPrompt();
+        
     });
 };
 
@@ -86,7 +85,7 @@ function viewAllRoles() {
             return;
         }
         console.table(result);
-        startPrompt();
+        
     });
 };
 
@@ -107,7 +106,7 @@ function viewAllEmployees() {
     db.query(sql, (err, result) => {
         if (err) throw err;
         console.table(result);
-        startPrompt();
+        
     });
 };
 
@@ -121,10 +120,10 @@ function viewAllEmployees() {
         }
     ).then((answer) => {
 
-    const sql = `INSERT INTO department (department_name)
-                VALUES (?)`;
+    const sql = 'INSERT INTO department (department_name) VALUES (?)';
+                
     const params = [answer.department_name];
-    db.query(sql, params, (err, result) => {
+    db.execute(sql, params, (err, result) => {
     if (err) throw err;
     console.log('The new department entered has been added successfully to the database.');
     
@@ -212,10 +211,10 @@ async function addEmployee() {
         db.query(`SELECT * FROM employee`, (err, result) => {
             if (err) {
                 res.status(500).json({ error: err.message })
-                startPrompt();
+                
             }
             console.table(result);
-            startPrompt();
+            
         });
 });
 };
@@ -241,10 +240,10 @@ async function updateEmployeeRole() {
         db.query(`SELECT * FROM employee`, (err, result) => {
             if (err) {
                 res.status(500).json({ error: err.message })
-                startPrompt();
+                
             }
             console.table(result);
-            startPrompt();
+           
         });
 });
 };
@@ -270,13 +269,90 @@ async function updateEmployeeManager() {
         db.query(`SELECT * FROM employee`, (err, result) => {
             if (err) {
                 res.status(500).json({ error: err.message })
-                startPrompt();
+               
             }
             console.table(result);
-            startPrompt();
+            
         });
 });
 };
+
+/* // Delete department
+async function deleteDepartment() {
+   await inquirer.prompt([
+        {
+            name: "department_id",
+            type: "number",
+            message: "Please enter the id of the department you want to delete from the database. Enter ONLY numbers."
+        }
+    ]).then(function (response) {
+        db.query("DELETE FROM department WHERE id = ?", [response.department_id], function (err, data) {
+            if (err) throw err;
+            console.log("The department entered has been deleted successfully from the database.");
+
+            
+        });
+        db.query(`SELECT * FROM department`, (err, result) => {
+            if (err) {
+                res.status(500).json({ error: err.message })
+                
+            }
+            console.table(result);
+            
+        });
+});
+};
+
+// Delete role
+async function deleteRole() {
+    await inquirer.prompt(
+        {
+            name: "role_id",
+            type: "number",
+            message: "Please enter the id of the role you want to delete from the database. Enter ONLY numbers."
+        }
+    ).then(function (response) {
+        db.query("DELETE FROM role WHERE id = ?", [response.role_id], function (err, data) {
+            if (err) throw err;
+            console.log("The role entered has been deleted successfully from the database.");
+
+            
+        });
+        db.query(`SELECT * FROM role`, (err, result) => {
+            if (err) {
+                res.status(500).json({ error: err.message })
+                
+            }
+            console.table(result);
+        
+        });
+});
+};
+
+// Delete Employee
+async function deleteEmployee() {
+    await inquirer.prompt(
+        {
+            name: "employee_id",
+            type: "number",
+            message: "Please enter the id of the employee you want to delete from the database. Enter ONLY numbers."
+        }
+    ).then(function (response) {
+        db.query("DELETE FROM employee WHERE id = ?", [response.employee_id], function (err, data) {
+            if (err) throw err;
+            console.log("The employee entered has been deleted successfully from the database.");
+        
+            
+        });
+        db.query(`SELECT * FROM employee`, (err, result) => {
+            if (err) {
+                res.status(500).json({ error: err.message })
+                
+            }
+            console.table(result);
+            
+});
+})}; */
 
 // Call to start app
 (async () => {
