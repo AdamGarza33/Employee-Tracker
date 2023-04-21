@@ -70,3 +70,16 @@ function startPrompt() {
         }
     })
  };
+
+ // View departments
+function viewAllDepartments() {
+    const sql = `SELECT * FROM departments`;
+    db.query(sql, (err, result) => {
+        if (err) {
+            res.status(500).json({ error: err.message })
+            return;
+        }
+        console.table(result);
+        startPrompt();
+    });
+};
