@@ -31,6 +31,7 @@ To use this program, you'll need to have Node.js and MySQL installed on your com
 * DB_NAME=employee_db
 
 Replace the values with your own MySQL credentials.
+
 5. then npm i the following: 
 * inquirer
 * mysql2
